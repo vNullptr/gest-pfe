@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import Navbar from '../components/navbar'
 import Dashboard from '../compact-pages/dashboard'
 import Inventory from '../compact-pages/inventory'
-import {homeIcon, inventoryIcon, shopIcon, userIcon, supplierIcon} from '../assets/icons/index'
+import {homeIcon, usersIcon, reportIcon, meetingIcon} from '../assets/icons/index'
 
 const Main = () => {
 
   const [currentPage, setcurrentPage] = useState(0)
     const pages = [
       {name:"Tableau de bord", icon:homeIcon},
-      {name:"Etudiants", icon:inventoryIcon},
-      {name:"Rapports", icon:shopIcon},
-      {name:"Soutenances", icon:userIcon},
+      {name:"Etudiants", icon:usersIcon},
+      {name:"Rapports", icon:reportIcon},
+      {name:"Soutenances", icon:meetingIcon},
     ]
     const compactPages = [
       Dashboard,
