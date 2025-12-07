@@ -1,0 +1,5 @@
+export {default as homeIcon} from "./homeIcon"
+export {default as inventoryIcon} from "./inventoryIcon"
+export {default as shopIcon} from "./shopIcon"
+export {default as userIcon} from "./userIcon"
+export {default as supplierIcon} from "./supplierIcon"
