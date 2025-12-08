@@ -6,6 +6,7 @@ const Login = () => {
       <div className="flex flex-col items-center justify-center w-1/2 min-h-screen bg-linear-to-bl from-primary via-[#1976D2] to-secondary shadow-[0_4px_50px_25px_rgba(0,0,0,0.1)] relative overflow-hidden">
         <h1 className="text-white text-5xl  text-center font-[1000]">Bienvenue sur PFE Manager 👋​</h1>
         <a className="absolute text-white -bottom-50 -right-30 font-extrabold opacity-10 text-[30em]">PFE</a>
+        <a className="absolute text-white -top-50 -left-30 font-extrabold opacity-10 text-[30em]">PFE</a>
       </div>
       <div className="flex flex-col items-center rounded-[5px] min-w-[400px] py-[30px] w-1/2 space-y-3 p-15">
           <h1 className="text-xl font-bold mb-10 w-90">Connectez vous a votre compte !</h1>
