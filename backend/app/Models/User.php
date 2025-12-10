@@ -36,7 +36,7 @@ class User extends Model
     }
 
     public function tags(){
-        return $this->belongsToMany(Tag::class, "tag_user", "tag_id", "user_id", "id", "id");
+        return $this->belongsToMany(Tag::class, "tag_user", "user_id", "tag_id", "id", "id");
     }
 
 }
