@@ -13,4 +13,9 @@ class Soutenance extends Model
         "heure_fin",
         "date_soutenance",
     ];
+
+    public function stage(){
+        return $this->belongsTo(Stage::class, "id_stage", "id");
+    }
+
 }

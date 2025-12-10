@@ -11,6 +11,11 @@ class Document extends Model
         "nom_fichier",
         "type_fichier",
         "chemin_fichier",
-        "date_upload",
+        //"date_upload",
     ];
+
+
+    public function stage(){
+        return $this->belongsTo(Stage::class, "id_stage", "id");
+    }
 }

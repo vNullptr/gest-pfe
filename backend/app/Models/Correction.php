@@ -11,4 +11,13 @@ class Correction extends Model
         "commentaire",
         // "date_assignation",
     ];
+
+    public function stage(){
+        return $this->belongsTo(Stage::class, "id_stage","id");
+    }
+
+    public function rapporteur(){
+        return $this->belongsTo(User::class, "id_rapporteur", "id");
+    }
+
 }
