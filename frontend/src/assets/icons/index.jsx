@@ -1,0 +1,5 @@
+export {default as homeIcon} from "./homeIcon"
+export {default as usersIcon} from "./usersIcon"
+export {default as reportIcon} from "./reportIcon"
+export {default as userIcon} from "./userIcon"
+export {default as meetingIcon} from "./meetingIcon"
