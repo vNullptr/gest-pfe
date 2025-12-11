@@ -25,6 +25,5 @@ class dbSeeder extends Seeder
         User::factory()->count(20)->create();
         Stage::factory()->count(10)->create();
 
-
     }
 }

@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Enums\Roles;
 use App\Enums\StatutEtudiant;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\user>
@@ -28,7 +29,8 @@ class userFactory extends Factory
             'nom' => fake()->lastName(),
             'prenom' => fake()->firstName(),
             'email' => fake()->safeEmail(),
-            'password'=> bcrypt(fake()->password()),
+            'telephone'=> fake()->phoneNumber(),
+            'password'=> Hash::make(fake()->password()),
             'role' => $role,
             'groupe' => rand(1,3),
             'statut' => $this->fakeStatus($role),
