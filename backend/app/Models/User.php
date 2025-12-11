@@ -39,7 +39,7 @@ class User extends Model
     }
 
     public function tags(){
-        return $this->belongsToMany(Tag::class, "tag_user", "user_id", "tag_id", "id", "id");
+        return $this->belongsToMany(Tags::class, "tag_user", "user_id", "tag_id", "id", "id");
     }
 
 }

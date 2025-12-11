@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Roles;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 
@@ -25,8 +26,12 @@ class stageFactory extends Factory
             'entreprise' => fake()->company(),
             'debut' => $start_date,
             'fin' => $end_date,
-            'id_etudiant' => User::factory(),
-            'id_encadrant' => User::factory()
+            'id_etudiant' => User::factory()->state([
+                'role'=>Roles::ETUDIANT
+            ]),
+            'id_encadrant' => User::factory()->state([
+                'role'=>Roles::PROF
+            ])
         ];
     }
 }
