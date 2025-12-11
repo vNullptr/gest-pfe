@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('corrections', function (Blueprint $table) {
             $table->id();
-            $table->enum("statut",["attente de correcteur","en cours", "corrige"]);
+            $table->smallInteger("statut")->unsigned();
             $table->string("commentaire");
             $table->timestamps();
 

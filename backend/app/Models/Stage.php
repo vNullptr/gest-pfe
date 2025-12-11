@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stage extends Model
 {
+
+    use HasFactory;
     
     protected $fillable = [
         "entreprise",

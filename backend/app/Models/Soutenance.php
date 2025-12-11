@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Soutenance extends Model
 {
+
+    use HasFactory;
     
     protected $fillable = [
         "salle",

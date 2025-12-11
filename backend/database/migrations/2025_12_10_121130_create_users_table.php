@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("email")->unique();
             $table->string("telephone")->unique();
             $table->integer("groupe")->nullable();
-            $table->enum("statut",["Recherche", "En Stage", "En Attente", "Soutenance", "Terminé"]);
+            $table->tinyInteger("statut")->unsigned()->nullable();
             $table->tinyInteger("role")->unsigned();
             $table->string("password");
             $table->timestamps();

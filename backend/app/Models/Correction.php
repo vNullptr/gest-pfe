@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Correction extends Model
 {
+    
+    use HasFactory;
     protected $fillable = [
         "statut",
         "commentaire",
