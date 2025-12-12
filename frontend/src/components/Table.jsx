@@ -4,17 +4,30 @@ const Table = ({tableHead, rowData}) => {
 
   const listElements = []
   for (let i = 0; i < 10; i++) {
-    listElements.push(<div className="w-full min-h-20 bg-white rounded-t-[10px]"></div>)
+    listElements.push(
+    <tr className="[&>td]:p-2 [&>td]:text-left [&>td]:font-light [&>td]:text-sm [&>td]:border-t [&>td]:border-gray-200">
+      <td>Data</td>
+      <td>Data</td>
+      <td>Data</td>
+      <td>Data</td>
+    </tr>)
   }
 
   return (
     <>
-      <div className="flex flex-col w-full max-h-[700px] px-2 overflow-y-scroll rounded-[10px] [&>div]:rounded-[10px] gap-3 [&>div]:shadow-[0_0_0_1px_rgba(0,0,0,0.06)] i [&>div]:border-secondary">
-        <div className="w-full min-h-10 bg-white rounded-t-[10px] sticky top-0 z-30 mt-1">
-          <div></div>
-        </div>
-        {listElements}
-      </div>
+      <table className='bg-white w-full outline outline-gray-200 rounded-lg select-none'>
+        <thead className="bg-tertiary">
+          <tr className=" [&>td]:p-2 [&>td]:font-bold [&>td]:text-left [&>td]:text-sm">
+            <td className="rounded-tl-lg">Head</td>
+            <td>Head</td>
+            <td>Head</td>
+            <td className="rounded-tr-lg">Head</td>
+          </tr>
+        </thead>
+        <tbody>
+          {listElements}
+        </tbody>
+      </table>
     </>
   )
 }

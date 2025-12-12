@@ -34,7 +34,7 @@ const Main = () => {
           </div> 
           <div className="h-[90%]">
             <div className="bg-gray-100 w-full h-full overflow-hidden">
-              <PageComponent/>
+              <PageComponent/> 
             </div>
           </div>
       </div>
