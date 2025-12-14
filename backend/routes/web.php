@@ -8,5 +8,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user/{id}', [testController::class, 'index']);
-Route::post("/login",[userController::class, 'login'])->middleware("web");
+Route::get('/user/check', [userController::class, 'check'])->middleware("auth:sanctum");
+Route::post('/login',[userController::class, 'login']);
