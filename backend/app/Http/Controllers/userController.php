@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Roles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Enums\RoleEnum;
 
 class userController extends Controller
 {
@@ -28,4 +31,41 @@ class userController extends Controller
             ], 401);
 
     }
+
+    public function check(Request $request){
+        return auth()->user();
+    }
+
+    public function show(Request $request){
+        $user = User::findOrFail($request->id);
+
+        if ( $user ) {
+            return response()->json($user);
+        }
+
+    }
+
+    public function index(Request $request){
+
+        $query = User::query();
+
+        if ($request->has('role')) {
+            if (Roles::tryFrom($request->role)){
+                return response()->json(['message'=>'Invalid role', 404]);
+            }
+            $query->where('role', $request->role);
+        }
+        if ($request->has('groupe')) {
+            $query->where('groupe', $request->groupe);
+        }
+
+        $users = $query->get();
+
+        if ($users->isEmpty()) {
+            return response()->json(['message' => 'No users found'], 404);
+        }
+
+        return $users;
+    }
+
 }
