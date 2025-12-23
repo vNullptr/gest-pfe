@@ -2,8 +2,6 @@ import React from 'react'
 
 const Dashboard = () => {
 
-  const tableHead = ["head1","head2","head3","head4"]
-  /* dashboard will just have amounts of each stuff and a welcome text*/ 
   return (
     <div className="p-5 flex flex-col">
       <h1 className="font-bold text-3xl text-black">Tableau de bord</h1>
