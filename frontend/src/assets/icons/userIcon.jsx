@@ -1,6 +1,6 @@
 import React from 'react'
 
-const userIcon = ({className}) => {
+const UserIcon = ({className}) => {
   return (
     <svg width="800px" height="800px" viewBox="0 0 16 16" fill="currentColor" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" className={className}>
         <path d="M8 7C9.65685 7 11 5.65685 11 4C11 2.34315 9.65685 1 8 1C6.34315 1 5 2.34315 5 4C5 5.65685 6.34315 7 8 7Z" fill="currentColor"/>
@@ -9,4 +9,4 @@ const userIcon = ({className}) => {
   )
 }
 
-export default userIcon
+export default UserIcon

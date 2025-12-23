@@ -1,6 +1,6 @@
 import React from 'react'
 
-const homeIcon = ({className}) => {
+const HomeIcon = ({className}) => {
   return (
    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="dashboard" className={className}>
     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -14,5 +14,5 @@ const homeIcon = ({className}) => {
     </svg>)
 }
 
-export default homeIcon
+export default HomeIcon
 
