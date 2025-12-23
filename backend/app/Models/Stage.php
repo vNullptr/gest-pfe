@@ -14,6 +14,7 @@ class Stage extends Model
         "entreprise",
         "debut",
         "fin",
+        "statut",
     ];
 
 

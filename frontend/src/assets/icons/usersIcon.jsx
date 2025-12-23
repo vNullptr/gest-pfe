@@ -1,6 +1,6 @@
 import React from 'react'
 
-const inventoryIcon = ({className}) => {
+const UsersIcon = ({className}) => {
   return (
     <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
       <g id="User / Users">
@@ -10,4 +10,4 @@ const inventoryIcon = ({className}) => {
   )
 }
 
-export default inventoryIcon
+export default UsersIcon

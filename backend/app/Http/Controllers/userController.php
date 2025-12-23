@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Roles;
+use App\Models\Stage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -17,7 +18,6 @@ class userController extends Controller
             'password' => ['required']
         ]);
 
-        // does the check for us since we extended the user model with Authenticatable
         if ( Auth::attempt($credentials, true) ) {
             $request->session()->regenerate();
             return response()->json([
@@ -66,6 +66,11 @@ class userController extends Controller
         }
 
         return $users;
+    }
+
+    public function stages(Request $request){
+        $stages = auth()->user()->stages;
+        return response()->json($stages, 200);
     }
 
 }

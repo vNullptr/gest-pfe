@@ -29,8 +29,8 @@ class User extends Authenticatable
     ];
 
 
-    public function stage(){
-        return $this->hasOne(Stage::class, "id_etudiant", "id");
+    public function stages(){
+        return $this->hasMany(Stage::class, "id_etudiant", "id");
     }
 
     public function stageEncadrer(){

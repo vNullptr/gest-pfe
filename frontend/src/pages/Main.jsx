@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/navbar'
-import Dashboard from '../compact-pages/dashboard'
-import Inventory from '../compact-pages/inventory'
-import {homeIcon, usersIcon, reportIcon, meetingIcon} from '../assets/icons/index'
+import Dashboard from '../compact-pages/Dashboard'
+import StudentStage from '../compact-pages/Student_Stage'
+import {HomeIcon, UsersIcon, ReportIcon, MeetingIcon} from '../assets/icons/index'
 import api from "../api/axios"
 import { useNavigate } from 'react-router-dom'
 
@@ -24,12 +24,10 @@ const Main = () => {
     }
   }
 
-  // logs in
   useEffect(()=>{
     checkLogin()
   },[])
 
-  //check if loaded
   useEffect(()=>{
     if (user) {
       setLoading(false)
@@ -39,19 +37,14 @@ const Main = () => {
   const [currentPage, setcurrentPage] = useState(0)
 
   const pages = [
-    {name:"Tableau de bord", icon:homeIcon, roles:[1,2,3]},
-    {name:"Etudiants", icon:usersIcon, roles:[2,3]},
-    {name:"Rapports", icon:reportIcon, roles:[1,2,3]},
-    {name:"Soutenances", icon:meetingIcon, roles:[2,3]},
+    {name:"Tableau de bord", icon:HomeIcon, roles:[1,2,3], page:Dashboard},
+    {name:"Mes Stages", icon:UsersIcon, roles:[1], page:StudentStage},
+    {name:"Mon Rapport", icon:ReportIcon, roles:[1], page:Dashboard},
+    {name:"Etudiants", icon:UsersIcon, roles:[2,3]},
+    {name:"Soutenances", icon:MeetingIcon, roles:[2,3]},
   ]
   
   const allowedPages = user ? pages.filter(page=>page.roles.includes(user.role)) : [];
-  console.log(user)
-
-  const compactPages = [
-    Dashboard,
-    Inventory
-  ]
 
   const Placeholder = () => (
     <div className="p-6 text-center text-accent opacity-50">Page not implemented yet</div>
@@ -65,7 +58,7 @@ const Main = () => {
     )
   }
 
-  const PageComponent = compactPages[currentPage] ?? Placeholder
+  const PageComponent = pages[currentPage]?.page ?? Placeholder
 
 
   return (

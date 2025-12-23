@@ -26,6 +26,7 @@ class stageFactory extends Factory
             'entreprise' => fake()->company(),
             'debut' => $start_date,
             'fin' => $end_date,
+            'statut' => 0,
             'id_etudiant' => User::factory()->state([
                 'role'=>Roles::ETUDIANT
             ]),
