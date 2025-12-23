@@ -14,7 +14,6 @@ class Document extends Model
         "nom_fichier",
         "type_fichier",
         "chemin_fichier",
-        //"date_upload",
     ];
 
 
