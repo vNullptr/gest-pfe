@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../api/axios';
 
-const StageForm = ({onClose}) => {
+const StageForm = ({handleClose}) => {
 
   const [stage, setStage] = useState(null);
   const [file, setFile] = useState(null);
@@ -29,7 +29,7 @@ const StageForm = ({onClose}) => {
 
       try{
         api.post("api/stage", formData)
-        onClose()
+        handleClose()
       }catch(err){
         if (err.response?.status === 422) {
           setError(err.response?.message)
@@ -81,7 +81,7 @@ const StageForm = ({onClose}) => {
           {error && <p className="text-red-600"> {error} </p>}
 
           <div className="flex flex-row justify-between">
-            <button className="p-2 bg-white border border-gray-300 text-gray-600 rounded-md hover:bg-gray-300 transition-all duration-200" onClick={onClose}>Annuler</button>
+            <button className="p-2 bg-white border border-gray-300 text-gray-600 rounded-md hover:bg-gray-300 transition-all duration-200" onClick={handleClose}>Annuler</button>
             <button className="p-2 bg-primary text-white rounded-md hover:bg-[#037fc7] transition-all duration-200" type="submit">Enregister</button>
           </div>
           

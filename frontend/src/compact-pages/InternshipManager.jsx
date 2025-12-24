@@ -39,7 +39,7 @@ const Inventory = () => {
       }
         {adding &&
           <Window Title={"Nouveau Stage"}>
-              <StageForm onClose={()=>setAdding(false)}></StageForm>
+              <StageForm handleClose={()=>setAdding(false)}></StageForm>
           </Window>
         }
       </div>

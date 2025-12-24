@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../api/axios'
 
-const AccountForm = ({onClose}) => {
+const AccountForm = ({handleClose}) => {
 
     const [user, setUser] = useState({
         prenom:"",
@@ -17,7 +17,7 @@ const AccountForm = ({onClose}) => {
         e.preventDefault();
         try {
             await api.post("api/users", user)
-            onClose()
+            handleClose()
         } catch (err){
             console.log(err)
         }
@@ -70,7 +70,7 @@ const AccountForm = ({onClose}) => {
             </div>
 
             <div className="flex flex-row justify-between">
-                <button className="p-2 bg-white border border-gray-300 text-gray-600 rounded-md hover:bg-gray-300 transition-all duration-200" onClick={onClose}>Annuler</button>
+                <button className="p-2 bg-white border border-gray-300 text-gray-600 rounded-md hover:bg-gray-300 transition-all duration-200" onClick={handleClose}>Annuler</button>
                 <button className="p-2 bg-primary text-white rounded-md hover:bg-[#037fc7] transition-all duration-200" type="submit">Enregister</button>
             </div>
         </form>
