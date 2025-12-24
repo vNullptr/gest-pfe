@@ -88,7 +88,7 @@ const CardStudent = ({Data}) => {
                         <select className="border border-gray-200 rounded-md outline-none p-1 w-full min-h-9 text-gray-600" onChange={(e)=>setSelectedSupervisor(e.target.value)}>
                             <option></option>
                             {supervisors.map((sup)=>(
-                                <option value={sup?.id}>Prof. {sup?.prénom} {sup?.nom}</option>
+                                <option value={sup?.id}>Prof. {sup?.prenom} {sup?.nom}</option>
                             ))}
                         </select>
                     </div>
