@@ -6,7 +6,7 @@ const Table = ({Headers, Data}) => {
 
   return (
     <>
-      <table className='bg-white w-full outline outline-gray-200 rounded-lg select-none'>
+      <table className='bg-white w-full outline outline-gray-200 rounded-lg select-none mb-[10%]'>
         <thead className="bg-tertiary">
           <tr className=" [&>th]:p-2 [&>th]:font-bold [&>th]:text-left [&>th]:text-sm">
             {Headers.map(h=>(
