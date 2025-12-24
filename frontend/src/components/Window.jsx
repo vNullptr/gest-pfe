@@ -7,7 +7,7 @@ const Window = ({children, Title}) => {
     )
         
     return (
-        <div className="absolute top-0 left-0 w-screen h-screen bg-[rgba(0,0,0,0.3)] flex items-center justify-center z-99">
+        <div className="fixed top-0 left-0 w-screen h-screen bg-[rgba(0,0,0,0.3)] flex items-center justify-center z-99">
             <div className="w-[650px] bg-white rounded-lg overflow-hidden flex flex-col">
                 <div className="w-full min-h-10 flex flex-col p-2">
                     <h1 className="text-2xl font-bold m-2">{Title}</h1>
