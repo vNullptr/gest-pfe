@@ -4,7 +4,7 @@ import Dashboard from '../compact-pages/Dashboard'
 import InternshipManager from '../compact-pages/InternshipManager'
 import StudentManager from '../compact-pages/StudentManager'
 import AccountManager from '../compact-pages/AccountManager'
-import {HomeIcon, UsersIcon, ReportIcon, MeetingIcon, UserIcon} from '../assets/icons/index'
+import {HomeIcon, UsersIcon, LogoutIcon, UserIcon} from '../assets/icons/index'
 import api from "../api/axios"
 import { useNavigate } from 'react-router-dom'
 
@@ -49,12 +49,12 @@ const Main = () => {
   const allowedPages = user ? pages.filter(page=>page.roles.includes(user.role)) : [];
 
   const Placeholder = () => (
-    <div className="p-6 text-center text-accent opacity-50">Page not implemented yet</div>
+    <div className="p-6 text-center text-accent opacity-50">Page incomplete</div>
   )
 
     if (loading){
     return (
-      <div className="">
+      <div className="w-screen h-screen flex items-center justify-center text-2xl">
         Loading ...
       </div>
     )
@@ -62,16 +62,32 @@ const Main = () => {
 
   const PageComponent = allowedPages[currentPage]?.page ?? Placeholder
 
+  const handleLogout = async ()=>{
+    try{
+      await api.post("/logout")
+      setUser(null)
+      navigate("/login")
+    }catch(err){
+      console.log(err)
+    }
+  }
+
 
   return (
     <div className="flex flex-row">
       <Navbar pageList={allowedPages} page={currentPage} changePage={setcurrentPage} />
       <div className="flex flex-col min-h-screen w-full">
-          <div className="h-[10%] border-b border-accent">
-            
+          <div className="h-[5svh] border-b border-accent flex flex-row justify-end items-center p-5 space-x-2">
+            <div className="flex flex-row items-center space-x-2 rounded-md border border-gray-200 px-2">
+              <p>{user?.prenom} {user?.nom}</p>
+              <span className="w-2 h-2 rounded-full bg-primary"></span>
+            </div>
+            <button className="hover:text-red-500 font-medium uppercase" onClick={handleLogout}>
+              <LogoutIcon className="w-6 h-6"/>
+            </button>
           </div> 
-          <div className="h-[90%]">
-            <div className="bg-gray-100 w-full h-full overflow-hidden">
+          <div className="h-fill">
+            <div className="bg-gray-100 w-full h-[95svh] overflow-hidden">
               <PageComponent userData={user}/>
             </div>
           </div>
