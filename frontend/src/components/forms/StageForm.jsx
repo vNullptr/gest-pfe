@@ -27,13 +27,14 @@ const StageForm = ({onClose}) => {
       formData.append('fin', stage?.fin)
       formData.append('document', file)
 
-      api.post("api/stage", formData)
-      .then(() => onClose())
-      .catch(err => {
+      try{
+        api.post("api/stage", formData)
+        onClose()
+      }catch(err){
         if (err.response?.status === 422) {
-          setError("Mauvais fichier !")
+          setError(err.response?.message)
         }
-      })
+      }
  
     } else {
       setError("Champ requis manquant")
