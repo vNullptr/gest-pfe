@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Enums\Roles;
 use App\Models\Stage;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Enums\RoleEnum;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class userController extends Controller
 {
@@ -73,4 +76,46 @@ class userController extends Controller
         return response()->json($stages, 200);
     }
 
+    public function all_stages(Request $request){
+        if (auth()->user()->role < 1){
+            return Response()->json(['message'=> 'Insufficient permissions'], 401);
+        }
+        
+        $users = User::with('stages')->whereHas("stages")->get();
+
+        return Response()->json($users,200);
+    }
+
+    public function all_prof(Request $request){
+        if (auth()->user()->role !== 2){
+            return Response()->json(['message'=> 'Insufficient permissions'], 401);
+        }
+
+        $prof = User::where("role", Roles::PROF)->get();
+
+        return Response()->json($prof,200);
+    }
+
+    public function new(Request $request){
+
+        if (auth()->user()->role !== 2){
+            return Response()->json(['message'=> 'Insufficient permissions'], 401);
+        }
+
+        $data = $request->validate([
+            'prenom'     => ['required', 'string', 'max:255'],
+            'nom'        => ['required', 'string', 'max:255'],
+            'telephone'  => ['required', 'string', 'max:20'],
+            'email'      => ['required', 'email', 'max:255', 'unique:users,email'],
+            'role'       => ['required', Rule::enum(Roles::class)],
+            'groupe'     => ['nullable', 'integer'],
+            'password'   => ['required', 'string'],
+        ]);
+
+        $data["password"] = Hash::make($data["password"]);
+
+        $user = User::create($data);
+
+        return response()->json($user,200);
+    }
 }
