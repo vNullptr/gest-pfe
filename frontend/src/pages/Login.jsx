@@ -19,7 +19,7 @@ const Login = () => {
       })
 
     if (response.status == 200){
-      navigate("/main")
+      navigate("/")
     }
    } catch(err){
       if (err.response) {
