@@ -26,9 +26,7 @@ const Inventory = () => {
     <div className="p-5 flex flex-col">
       <div className="flex flex-row justify-between">
         <h1 className="font-bold text-3xl text-black">Mes Stages</h1>
-        <button className="px-2 bg-primary text-white rounded-md hover:bg-[#037fc7] transition-all duration-200" onClick={()=>setAdding(true)}>
-            Nouveau
-        </button>
+        <button className="px-2 bg-primary text-white rounded-md hover:bg-[#037fc7] transition-all duration-200" onClick={()=>setAdding(true)}>Nouveau</button>
       </div>
       <div className="mt-5 flex flex-col space-y-3 h-fit">
         {
