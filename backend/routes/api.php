@@ -5,7 +5,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
 
-Route::get("/users/{id}",[userController::class,"show"])->middleware("auth:sanctum");
+Route::get("/users/{user}",[userController::class,"show"])->middleware("auth:sanctum");
+Route::patch("/users/{user}",[userController::class,"update"])->middleware("auth:sanctum");
+Route::delete("/users/{user}",[userController::class,"destroy"])->middleware("auth:sanctum");
+
 Route::get("/users", [userController::class,"index"])->middleware("auth:sanctum");
 Route::post("/users", [userController::class,"new"])->middleware("auth:sanctum");
 Route::get("/me/stages", [userController::class,"stages"])->middleware("auth:sanctum");

@@ -39,8 +39,7 @@ class userController extends Controller
         return auth()->user();
     }
 
-    public function show(Request $request){
-        $user = User::findOrFail($request->id);
+    public function show(User $user){
 
         if ( $user ) {
             return response()->json($user);
@@ -117,5 +116,42 @@ class userController extends Controller
         $user = User::create($data);
 
         return response()->json($user,200);
+    }
+
+    public function update(User $user, Request $request){
+
+        if (auth()->user()->role !== 2){
+            return Response()->json(['message'=> 'Insufficient permissions'], 401);
+        }
+
+        $data = $request->validate([
+            'prenom'     => ['sometimes', 'string', 'max:255'],
+            'nom'        => ['sometimes', 'string', 'max:255'],
+            'telephone'  => ['sometimes', 'string', 'max:20'],
+            'email'      => ['sometimes', 'email', 'max:255'],
+            'role'       => ['sometimes', Rule::enum(Roles::class)],
+            'groupe'     => ['sometimes', 'integer'],
+            'password'   => ['sometimes', 'string'],
+        ]);
+
+        if (isset($data['password'])){
+            $user->password = Hash::make($data['password']);
+        }
+
+        $user->update($data);
+
+        return response()->json($user,200);
+
+        
+    }
+
+    public function destroy(User $user){
+        if (auth()->user()->role !== 2){
+            return Response()->json(['message'=> 'Insufficient permissions'], 401);
+        }
+
+        $user->delete();
+
+        return response()->json(['message'=> 'destroyed !'],200);
     }
 }
