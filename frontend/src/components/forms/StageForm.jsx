@@ -63,7 +63,7 @@ const StageForm = ({onClose}) => {
             <h1 className="text-lg font-semibold text-black">Documents</h1>
             <h2 className="text-gray-500 text-sm">Glissez vos documents ici !</h2>
             <div 
-            className={`min-h-100 border-3 ${isDragging ? "border-primary" : "border-gray-200"} border-dashed rounded-lg bg-gray-100 p-5 mt-2 flex items-center justify-center relative`}
+            className={` border-3 ${isDragging ? "border-primary" : "border-gray-200"} border-dashed rounded-lg bg-gray-100 p-5 mt-2 flex items-center justify-center relative`}
             onDragEnter={()=>setDragging(true)}
             onDragLeave={()=>setDragging(false)}
             onDrop={handleDrop}
