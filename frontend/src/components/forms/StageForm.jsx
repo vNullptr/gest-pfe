@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../api/axios';
 
-const StageForm = ({onClose}) => {
+const StageForm = ({handleClose}) => {
 
   const [stage, setStage] = useState(null);
   const [file, setFile] = useState(null);
@@ -27,13 +27,14 @@ const StageForm = ({onClose}) => {
       formData.append('fin', stage?.fin)
       formData.append('document', file)
 
-      api.post("api/stage", formData)
-      .then(() => onClose())
-      .catch(err => {
+      try{
+        api.post("api/stage", formData)
+        handleClose()
+      }catch(err){
         if (err.response?.status === 422) {
-          setError("Mauvais fichier !")
+          setError(err.response?.message)
         }
-      })
+      }
  
     } else {
       setError("Champ requis manquant")
@@ -63,7 +64,7 @@ const StageForm = ({onClose}) => {
             <h1 className="text-lg font-semibold text-black">Documents</h1>
             <h2 className="text-gray-500 text-sm">Glissez vos documents ici !</h2>
             <div 
-            className={`min-h-100 border-3 ${isDragging ? "border-primary" : "border-gray-200"} border-dashed rounded-lg bg-gray-100 p-5 mt-2 flex items-center justify-center relative`}
+            className={` border-3 ${isDragging ? "border-primary" : "border-gray-200"} border-dashed rounded-lg bg-gray-100 p-5 mt-2 flex items-center justify-center relative`}
             onDragEnter={()=>setDragging(true)}
             onDragLeave={()=>setDragging(false)}
             onDrop={handleDrop}
@@ -80,7 +81,7 @@ const StageForm = ({onClose}) => {
           {error && <p className="text-red-600"> {error} </p>}
 
           <div className="flex flex-row justify-between">
-            <button className="p-2 bg-white border border-gray-300 text-gray-600 rounded-md hover:bg-gray-300 transition-all duration-200" onClick={onClose}>Annuler</button>
+            <button className="p-2 bg-white border border-gray-300 text-gray-600 rounded-md hover:bg-gray-300 transition-all duration-200" onClick={handleClose}>Annuler</button>
             <button className="p-2 bg-primary text-white rounded-md hover:bg-[#037fc7] transition-all duration-200" type="submit">Enregister</button>
           </div>
           

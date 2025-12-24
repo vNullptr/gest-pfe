@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\StatutStage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
@@ -31,6 +32,10 @@ class User extends Authenticatable
 
     public function stages(){
         return $this->hasMany(Stage::class, "id_etudiant", "id");
+    }
+
+    public function currentStage(){
+        return $this->hasOne(Stage::class,"id_etudiant","id")->where("statut", StatutStage::EN_COURS);
     }
 
     public function stageEncadrer(){

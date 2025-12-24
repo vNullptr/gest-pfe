@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Enums\Roles;
 use App\Models\Stage;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Enums\RoleEnum;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class userController extends Controller
 {
@@ -36,8 +39,7 @@ class userController extends Controller
         return auth()->user();
     }
 
-    public function show(Request $request){
-        $user = User::findOrFail($request->id);
+    public function show(User $user){
 
         if ( $user ) {
             return response()->json($user);
@@ -73,4 +75,83 @@ class userController extends Controller
         return response()->json($stages, 200);
     }
 
+    public function all_stages(Request $request){
+        if (auth()->user()->role < 1){
+            return Response()->json(['message'=> 'Insufficient permissions'], 401);
+        }
+        
+        $users = User::with('stages')->whereHas("stages")->get();
+
+        return Response()->json($users,200);
+    }
+
+    public function all_prof(Request $request){
+        if (auth()->user()->role !== 2){
+            return Response()->json(['message'=> 'Insufficient permissions'], 401);
+        }
+
+        $prof = User::where("role", Roles::PROF)->get();
+
+        return Response()->json($prof,200);
+    }
+
+    public function new(Request $request){
+
+        if (auth()->user()->role !== 2){
+            return Response()->json(['message'=> 'Insufficient permissions'], 401);
+        }
+
+        $data = $request->validate([
+            'prenom'     => ['required', 'string', 'max:255'],
+            'nom'        => ['required', 'string', 'max:255'],
+            'telephone'  => ['required', 'string', 'max:20'],
+            'email'      => ['required', 'email', 'max:255', 'unique:users,email'],
+            'role'       => ['required', Rule::enum(Roles::class)],
+            'groupe'     => ['nullable', 'integer'],
+            'password'   => ['required', 'string'],
+        ]);
+
+        $data["password"] = Hash::make($data["password"]);
+
+        $user = User::create($data);
+
+        return response()->json($user,200);
+    }
+
+    public function update(User $user, Request $request){
+
+        if (auth()->user()->role !== 2){
+            return Response()->json(['message'=> 'Insufficient permissions'], 401);
+        }
+
+        $data = $request->validate([
+            'prenom'     => ['sometimes', 'string', 'max:255'],
+            'nom'        => ['sometimes', 'string', 'max:255'],
+            'telephone'  => ['sometimes', 'string', 'max:20'],
+            'email'      => ['sometimes', 'email', 'max:255'],
+            'role'       => ['sometimes', Rule::enum(Roles::class)],
+            'groupe'     => ['sometimes', 'integer'],
+            'password'   => ['sometimes', 'string'],
+        ]);
+
+        if (isset($data['password'])){
+            $user->password = Hash::make($data['password']);
+        }
+
+        $user->update($data);
+
+        return response()->json($user,200);
+
+        
+    }
+
+    public function destroy(User $user){
+        if (auth()->user()->role !== 2){
+            return Response()->json(['message'=> 'Insufficient permissions'], 401);
+        }
+
+        $user->delete();
+
+        return response()->json(['message'=> 'destroyed !'],200);
+    }
 }

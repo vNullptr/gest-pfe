@@ -8,6 +8,7 @@ const CardStage = ({Data}) => {
     const [showButton, setshowButton] = useState(true)
     const [viewing, setViewing] = useState(false)
     const [documents, setDocuments] = useState(null)
+    const [supervisor, setSupervisor] = useState(null)
     const statusStyles = [
         {label:"En Attente", style:"bg-blue-200 ring-blue-600 text-blue-800"},
         {label:"En Cours", style:"bg-amber-200 ring-amber-600 text-amber-800"},
@@ -15,13 +16,21 @@ const CardStage = ({Data}) => {
     ]
 
     const fetchDetails = async ()=>{
-        api.get(`api/stage/${Data?.id}/doc`)
-        .then(resp => setDocuments(resp.data))
-        .catch(err=>{
+
+        try {
+            const resp = await api.get(`api/stage/${Data?.id}/doc`)
+            setDocuments(resp.data)
+            
+            if (Data?.id_encadrant !== null){
+                const respEnc = await api.get(`api/users/${Data?.id_encadrant}`)
+                setSupervisor(respEnc.data)
+            }
+        } catch (err){
             if (err.response.status){
                 setDocuments({nom_fichier:"Fichier introuvable !"})
             }
-        })
+        }
+
         
     }
 
@@ -57,7 +66,7 @@ const CardStage = ({Data}) => {
                     </div>
                     <div>
                         <h1 className="text-lg font-semibold text-black">Encadrant</h1>
-                        <div className="border border-gray-200 rounded-full w-fit px-2">{Data?.statut == 0? "Non assigné":"Prof Test"}</div>
+                        <div className="border border-gray-200 rounded-full w-fit px-2">{Data?.statut == 0? "Non assigné":`Prof. ${supervisor?.prenom} ${supervisor?.nom}`}</div>
                     </div>
                     <div>
                         <h1 className="text-lg font-semibold text-black">Documents</h1>
