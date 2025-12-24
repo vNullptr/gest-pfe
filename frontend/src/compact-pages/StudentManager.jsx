@@ -8,7 +8,7 @@ const StudentManager = () => {
   const Tabs = [
     {label:"En Attente", view:<StudentValidationView/>},
     {label:"En Cours", view:<StudentTrackingView/>},
-    {label:"Correction", view:<div>test</div>},
+    {label:"Correction", view:<div className="p-6 text-center text-gray-700 opacity-50">Page incomplete</div>},
   ]
 
   return (
