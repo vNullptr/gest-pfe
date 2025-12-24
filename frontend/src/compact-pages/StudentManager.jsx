@@ -15,7 +15,7 @@ const StudentManager = () => {
     <div className="flex flex-col p-3">
       <div className="flex flex-row w-full items-center min-h-[5svh] mb-2 space-x-1">
         {Tabs.map((t, index)=>(
-          <div 
+          <div key={index}
           className={`${index == tab ? "bg-gray-200": "bg-white"} hover:bg-gray-200 rounded-xl border border-gray-200 p-2 cursor-pointer`}
           onClick={()=>setTab(index)}
           >{t.label}</div>
