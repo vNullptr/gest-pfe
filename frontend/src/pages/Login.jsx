@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import api from '../api/axios'
 import {useNavigate} from 'react-router-dom'
+import logo from '../assets/img/logo.png'
 
 const Login = () => {
 
@@ -50,11 +51,12 @@ const Login = () => {
         <a className="absolute text-white -top-50 -left-30 font-extrabold opacity-10 text-[30em]">PFE</a>
       </div>
       <div className="flex flex-col items-center rounded-[5px] min-w-[400px] py-[30px] w-1/2 p-15 bg-white">
-          <form className="space-y-3" onSubmit={(e)=>{ 
+          <form className="space-y-3 flex flex-col justify-center items-center" onSubmit={(e)=>{ 
             e.preventDefault()
             e.stopPropagation()
             login(email, password) 
             }}>
+            <img className="w-100" src={logo}></img>
             <h1 className="text-xl font-bold mb-10 w-90">Connectez vous a votre compte !</h1>
             <div className="relative">
               <input id="emailInput" className={`px-3 border border-gray-300 outline-0 rounded-md p-[3px] focus:border-primary w-90 h-11 ${ wrongCredit ? "border-red-500": ""}`} type="email" onChange={(e)=>{ setEmail(e.target.value); setwrongCredit(false); }} value={email}></input>

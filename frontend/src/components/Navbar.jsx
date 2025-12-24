@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import logo from '../assets/img/logo.png'
 
 const Navbar = (props) => {
 
@@ -12,7 +13,7 @@ const Navbar = (props) => {
     return (
     <div className="bg-white min-h-screen min-w-[250px] border-r border-accent z-10 flex flex-col">
         <div className="h-[5svh] flex flex-row items-center justify-center border-b border-accent">
-            <div className="border border-accent w-[30px] h-[30px]"></div>
+            <img src={logo} className="w-[100px] h-[100px]"></img>
         </div>
         <div className="h-fill px-5 pt-7">
             {props.pageList.map((e, index) => {
