@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../components/navbar'
 import Dashboard from '../compact-pages/Dashboard'
 import StudentStage from '../compact-pages/Student_Stage'
+import StudentManager from '../compact-pages/StudentManager'
 import {HomeIcon, UsersIcon, ReportIcon, MeetingIcon} from '../assets/icons/index'
 import api from "../api/axios"
 import { useNavigate } from 'react-router-dom'
+
 
 const Main = () => {
 
@@ -39,9 +41,7 @@ const Main = () => {
   const pages = [
     {name:"Tableau de bord", icon:HomeIcon, roles:[1,2,3], page:Dashboard},
     {name:"Mes Stages", icon:UsersIcon, roles:[1], page:StudentStage},
-    {name:"Mon Rapport", icon:ReportIcon, roles:[1], page:Dashboard},
-    {name:"Etudiants", icon:UsersIcon, roles:[2,3]},
-    {name:"Soutenances", icon:MeetingIcon, roles:[2,3]},
+    {name:"Etudiants", icon:UsersIcon, roles:[3], page:StudentManager},
   ]
   
   const allowedPages = user ? pages.filter(page=>page.roles.includes(user.role)) : [];
@@ -58,7 +58,7 @@ const Main = () => {
     )
   }
 
-  const PageComponent = pages[currentPage]?.page ?? Placeholder
+  const PageComponent = allowedPages[currentPage]?.page ?? Placeholder
 
 
   return (
