@@ -10,7 +10,7 @@ const Table = ({Headers, Data}) => {
         <thead className="bg-tertiary">
           <tr className=" [&>th]:p-2 [&>th]:font-bold [&>th]:text-left [&>th]:text-sm">
             {Headers.map(h=>(
-              <th key={h?.key}>{h?.label}</th>
+              <th key={h?.label}>{h?.label}</th>
             ))}
           </tr>
         </thead>
@@ -22,8 +22,8 @@ const Table = ({Headers, Data}) => {
               onMouseEnter={()=>setHovered(i)}
               onMouseLeave={()=>setHovered(null)}
               >
-                {Headers.map(col=>(
-                  <td key={col?.key}>{col?.val(row)}</td>
+                {Headers.map((col,index)=>(
+                  <td key={index}>{col?.val(row)}</td>
                 ))}
               </tr>
             ))
