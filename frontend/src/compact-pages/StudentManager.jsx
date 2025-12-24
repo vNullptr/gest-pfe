@@ -1,34 +1,28 @@
 import React, { useState } from 'react'
-import api from '../api/axios'
-import Table from '../components/Table'
-import { EyeIcon } from '../assets/icons'
+import StudentValidationView from '../components/views/StudentValidationView'
+import StudentTrackingView from '../components/views/StudentTrackingView'
 
 const StudentManager = () => {
 
-  const [Students, setStudents] = useState([
-    {name:"Name", statut:1, entreprise:"Test Entreprise", encadrant_id:"Non assigné"},
-    {name:"Name", statut:1, entreprise:"Test Entreprise", encadrant_id:"Non assigné"},
-    {name:"Name", statut:1, entreprise:"Test Entreprise", encadrant_id:"Non assigné"},
-  ])
-  const Headers = [
-    {label:"Prenom", key:"name", width:50},
-    {label:"Nom", key:"name", width:10},
-    {label:"Entreprise", width:10, key:"entreprise"},
-    {label:"Encadrant", width:10, key:"encadrant_id", tag:true},
-    {label:"", width:10, action:(<button className="p-1 bg-primary text-sm font-light text-white rounded-sm hover:bg-blue-600 outline-none">Consulter</button>)}
+  const [tab, setTab] = useState(0)
+  const Tabs = [
+    {label:"En Attente", view:<StudentValidationView/>},
+    {label:"En Cours", view:<StudentTrackingView/>},
+    {label:"Correction", view:<div>test</div>},
   ]
 
   return (
-    <div className="p-3 grid grid-cols-2 gap-2">
-      <div className="flex flex-col space-y-2">
-        <h1 className="font-bold text-xl">En Attente</h1>
-        <Table Headers={Headers} Data={Students}/>
+    <div className="flex flex-col p-3">
+      <div className="flex flex-row w-full items-center min-h-[5svh] mb-2 space-x-1">
+        {Tabs.map((t, index)=>(
+          <div 
+          className={`${index == tab ? "bg-gray-200": "bg-white"} hover:bg-gray-200 rounded-xl border border-gray-200 p-2 cursor-pointer`}
+          onClick={()=>setTab(index)}
+          >{t.label}</div>
+        ))}
       </div>
-      <div className="flex flex-col space-y-2">
-        <h1 className="font-bold text-xl">En Stage</h1>
-        <Table Headers={Headers} Data={Students}/>
-      </div>
-      
+      <div className="h-px bg-gray-300 mb-2"></div>
+      {Tabs[tab].view}
     </div>
   )
 }
