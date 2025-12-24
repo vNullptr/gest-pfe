@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import Table from '../Table'
 import api from '../../api/axios'
+import { EditIcon } from '../../assets/icons'
 
 const StudentTrackingView = () => {
 
     const [students, setStudents] = useState([])
     const [supervisors, setSupervisors] = useState([])
+    const [selectedSupervisor, setSelectedSupervisor] = useState(null)
+    const [editing, setEditing] = useState(null)
+    
     const Headers = [
         {label:"Prénom", val:(data)=>(data?.prenom)},
         {label:"Nom", val:(data)=>(data?.nom)},
@@ -21,6 +25,13 @@ const StudentTrackingView = () => {
                Prof. {sp?.prenom} {sp?.nom}
             </div>
         }},
+        {label:"", val:(data)=>{
+            return <div className="flex flex-row justify-end">
+                <button onClick={()=>setEditing(data?.id)}>
+                    <EditIcon className="w-5 h-5 text-gray-500 hover:text-gray-900"/>
+                </button>
+            </div>
+        }}
     ]
 
     useEffect(()=>{
@@ -39,6 +50,10 @@ const StudentTrackingView = () => {
     fetchData()
 
     },[])
+
+    const handleEdit = async () =>{
+        console.log(selectedSupervisor)
+    }
 
   return (
     <div>
