@@ -22,8 +22,8 @@ class dbSeeder extends Seeder
             Tags::create(['nom'=> $tag]);
         }
 
-        User::factory()->count(20)->create();
-        Stage::factory()->count(10)->create();
+        User::factory()->count(1)->create();
+        //Stage::factory()->count(10)->create();
 
     }
 }
