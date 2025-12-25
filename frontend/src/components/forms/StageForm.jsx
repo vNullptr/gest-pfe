@@ -3,15 +3,15 @@ import api from '../../api/axios';
 
 const StageForm = ({handleClose}) => {
 
-  const [stage, setStage] = useState(null);
-  const [file, setFile] = useState(null);
-  const [isDragging, setDragging] = useState(false);
+  const [Stage, setStage] = useState(null);
+  const [File, setFile] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState(null)
 
   const handleDrop = (e)=>{
     e.preventDefault()
     setError(null)
-    setDragging(false)
+    setIsDragging(false)
 
     const droppedFile = e.dataTransfer.files[0];
     if (droppedFile) setFile(droppedFile)
@@ -19,13 +19,13 @@ const StageForm = ({handleClose}) => {
 
   const handleSubmit = async (e)=>{
     e.preventDefault()
-    if (stage?.entreprise && stage?.debut && stage?.fin && file){
+    if (Stage?.entreprise && Stage?.debut && Stage?.fin && File){
 
       const formData = new FormData()
-      formData.append('entreprise', stage?.entreprise)
-      formData.append('debut', stage?.debut)
-      formData.append('fin', stage?.fin)
-      formData.append('document', file)
+      formData.append('entreprise', Stage?.entreprise)
+      formData.append('debut', Stage?.debut)
+      formData.append('fin', Stage?.fin)
+      formData.append('document', File)
 
       try{
         api.post("api/stage", formData)
@@ -46,17 +46,17 @@ const StageForm = ({handleClose}) => {
         <form className="space-y-8" onSubmit={handleSubmit}>
           <div className="relative">
             <label className="absolute -top-2.5 left-3 text-[0.8em] bg-white text-gray-500 px-1">Entreprise</label>
-            <input className="border border-gray-200 rounded-md outline-none p-1 min-w-70 min-h-9 text-gray-900" placeholder='Entrez ici' value={stage?.entreprise || ""} onChange={(e)=>{setStage(prev =>({...prev, entreprise:e.target.value})); setError(null)}}></input>
+            <input className="border border-gray-200 rounded-md outline-none p-1 min-w-70 min-h-9 text-gray-900" placeholder='Entrez ici' value={Stage?.entreprise || ""} onChange={(e)=>{setStage(prev =>({...prev, entreprise:e.target.value})); setError(null)}}></input>
           </div>
 
           <div className="flex flex-row items-center justify-between space-x-5">
             <div className="relative">
               <label className="absolute -top-2.5 left-3 text-[0.8em] bg-white text-gray-500 px-1">Debut</label>
-              <input type="date" className="border border-gray-200 rounded-md outline-none p-1 min-w-70 min-h-9 text-gray-600" value={stage?.debut || ""} onChange={(e)=>{setStage(prev =>({...prev, debut:e.target.value})); setError(null)}}></input>
+              <input type="date" className="border border-gray-200 rounded-md outline-none p-1 min-w-70 min-h-9 text-gray-600" value={Stage?.debut || ""} onChange={(e)=>{setStage(prev =>({...prev, debut:e.target.value})); setError(null)}}></input>
             </div>
             <div className="relative">
               <label className="absolute -top-2.5 left-3 text-[0.8em] bg-white text-gray-500 px-1">Fin</label>
-              <input type="date" className="border border-gray-200 rounded-md outline-none p-1 min-w-70 min-h-9 text-gray-600" min={stage?.debut || ""} value={stage?.fin || ""} onChange={(e)=>{setStage(prev =>({...prev, fin:e.target.value})); setError(null)}}></input>
+              <input type="date" className="border border-gray-200 rounded-md outline-none p-1 min-w-70 min-h-9 text-gray-600" min={Stage?.debut || ""} value={Stage?.fin || ""} onChange={(e)=>{setStage(prev =>({...prev, fin:e.target.value})); setError(null)}}></input>
             </div>
           </div>
 
@@ -65,12 +65,12 @@ const StageForm = ({handleClose}) => {
             <h2 className="text-gray-500 text-sm">Glissez vos documents ici !</h2>
             <div 
             className={` border-3 ${isDragging ? "border-primary" : "border-gray-200"} border-dashed rounded-lg bg-gray-100 p-5 mt-2 flex items-center justify-center relative`}
-            onDragEnter={()=>setDragging(true)}
-            onDragLeave={()=>setDragging(false)}
+            onDragEnter={()=>setIsDragging(true)}
+            onDragLeave={()=>setIsDragging(false)}
             onDrop={handleDrop}
             >
-              {file ?
-                <p className={`text-lg text-primary absolute`}>{file.name}</p>
+              {File ?
+                <p className={`text-lg text-primary absolute`}>{File.name}</p>
                 :
                 <p className={`text-lg ${isDragging ? "text-primary" : "text-gray-500"} absolute`}>Glissez ici ou cliquez !</p>
               }
