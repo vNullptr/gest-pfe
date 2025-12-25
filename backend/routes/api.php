@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\stageController;
+use App\Http\Controllers\statController;
+use App\Http\Controllers\userController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\userController;
 
 Route::get("/users/{user}",[userController::class,"show"])->middleware("auth:sanctum");
 Route::patch("/users/{user}",[userController::class,"update"])->middleware("auth:sanctum");
@@ -21,3 +22,5 @@ Route::post("/stage", [stageController::class,"new"])->middleware("auth:sanctum"
 Route::get("/stage/{stage}/doc", [stageController::class,"docs"])->middleware("auth:sanctum");
 Route::get("/stage/{stage}/doc/download", [stageController::class,"download"])->middleware("auth:sanctum");
 Route::patch("/stage/{stage}/supervisor", [stageController::class,"set_encadrant"])->middleware("auth:sanctum");
+
+Route::get("/dashboard/stats", [statController::class,"stats"])->middleware("auth:sanctum");
